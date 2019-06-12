@@ -33,12 +33,12 @@
 			return {
 				title: 'Hello',
 				circletype: [
-					{ typename: '读书' },
-					{ typename: '运动' },
-					{ typename: '游戏' },
-					{ typename: '程序员' },
-					{ typename: '情感' },
-					{ typename: '电影' }
+					{ typename: '读书', img: '../../static/more.png' },
+					{ typename: '运动', img: '../../static/more.png'  },
+					{ typename: '游戏', img: '../../static/more.png'  },
+					{ typename: '程序员', img: '../../static/more.png'  },
+					{ typename: '情感', img: '../../static/more.png'  },
+					{ typename: '电影', img: '../../static/more.png'  }
 				],
 				message: [
 					{ typename: '读书', detail: 'LTE机制与流程'},
@@ -71,9 +71,8 @@
 <style>
 	.content {
 		text-align: center;
-		height: auto
-		;
-		background: rgb(240,240,240);
+		height: auto;
+		background: rgb(230,230,230);
 	}
 /* 	我的圈子部分 */
     .my-circles {
@@ -104,7 +103,7 @@
 	}
 	.scroll-circles {
 		height: 200upx;
-		width: 210upx;
+		width: 200upx;
 		display:inline-block
 	}
 	.scroll-screen {
@@ -122,7 +121,8 @@
 	.find-more {
 		margin-top: 20upx;
 		width: 100%;
-		height: 500upx;
+		height: auto;
+		background: rgb(240,240,240);
 	}
 	.find-type {
 		height: 70upx;
@@ -131,12 +131,11 @@
     .circle-text {
 		height: 50upx;
 		width: 100%;
-		background: rgb(240,240,240);
+		background: rgb(230,230,230);
 	}
     .text-detail{
-		margin-top: 20upx;
-		overflow-y: scroll;
-		
+		height: 200upx;
+		margin-bottom: 10upx;
 	}
 	.message-one {
 

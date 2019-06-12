@@ -1,6 +1,6 @@
 <template>
 	<view class="ccl" v-on:click="showmore">
-		<image class="circle-icon " src="../../static/more.png"></image></br>
+		<image class="circle-icon " :src="circlename.img"></image></br>
 		<text class="circle-text">{{ circlename.typename }}</text>
 	</view>
 </template>

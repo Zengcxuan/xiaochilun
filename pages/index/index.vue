@@ -9,7 +9,7 @@
 
 			<scroll-view class="scroll-screen" scroll-x="true" >
 				<view class="scroll-circles" v-for="item in circletype" >
-                       <circlebutton class="circle-choice" v-bind:circlename="item" ></circlebutton>
+                       <circle-button class="circle-choice" v-bind:circlename="item" ></circle-button>
 				</view>	   
 			</scroll-view>
 		</view>
@@ -19,15 +19,15 @@
         	</view>
 			
 			<view class="text-detail" v-for="item in message">
-				<messagedetail class="message-one" v-bind:messageinfo="item"></messagedetail>
+				<message-detail class="message-one" v-bind:messageinfo="item"></message-detail>
 			</view>
         </view>
 	</view>
 </template>
 
 <script>
-	import circlebutton from '@/components/circlebutton.vue';
-	import messagedetail from '@/components/messagedetail.vue';
+	import circleButton from '@/components/circle-button.vue';
+	import messageDetail from '@/components/message-detail.vue';
 	export default {
 		data() {
 			return {
@@ -55,8 +55,8 @@
 			}
 		},
 		components: {
-			circlebutton,
-			messagedetail
+			circleButton,
+			messageDetail
 		},
 		onLoad() {
 

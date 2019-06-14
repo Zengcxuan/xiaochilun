@@ -7,7 +7,7 @@
 
 <script>
 	export default {
-		name: 'circlebutton',
+		name: 'circle-button',
 		props: ['circlename'],
 		data() {
 			return {

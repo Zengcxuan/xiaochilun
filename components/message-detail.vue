@@ -33,7 +33,7 @@
 
 <script>
 	export default {
-		name: 'messagedetail',
+		name: 'message-detail',
 		props: ['messageinfo'],
 		data() {
 			return {

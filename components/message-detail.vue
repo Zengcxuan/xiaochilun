@@ -26,7 +26,7 @@
 			<view class="message-modify-module">
 				<image class="modify-icon" src="../../static/msg/out.png" mode=""></image>
 			</view>			
-			<image src="../../static/msg/more.png" style="float: right; padding: 5upx; height: 40upx; width: 40upx;" mode=""></image>
+			<image src="../../static/msg/more.png" style="float: right; padding: 10upx; height: 40upx; width: 40upx;" mode=""></image>
 		</view>
 	</view>
 </template>
@@ -69,6 +69,7 @@
 		height: auto;
 		padding: 20upx;
 		overflow: auto;
+		background: #FFFFFF;
 	}
 	.message-text {
 		width: auto;
@@ -79,6 +80,7 @@
 		width: 100%;
 		height: 90upx;
 		border-bottom: solid 3upx rgb(200, 200, 200);
+		background: #FFFFFF;
 	}
 	.head {
 		height: 70upx;
@@ -91,9 +93,10 @@
 		font-size: 20upx;
 	}
 	.message-modify {
-		width: 95%;
+		width: 100%;
 		height: 50upx;
 		white-space: nowrap;
+		background: #FFFFFF;
 	}
 	.message-modify-module {
 		float: left;

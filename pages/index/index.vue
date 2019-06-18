@@ -14,13 +14,27 @@
 			</scroll-view>
 		</view>
         <view class="find-more">
-        	<view class="find-type">
+<!--        	<view class="find-type">
         		
         	</view>
 			
 			<view class="text-detail" v-for="item in message">
 				<message-detail class="message-one" v-bind:messageinfo="item"></message-detail>
+			</view> -->
+			<view id="tab-bar" class="uni-swiper-tab" >
+				<view v-for="(tab, index) in tabBars" :key="tab.ref" :class="['swiper-tab-list',tabIndex==index ? 'active' : '']"
+				 :id="tab.ref" :data-current="index" @click="tapTab(index)">{{tab.name}}</view>
 			</view>
+			
+			<scroll-view class="list" v-for="(tabItem, idx) in newsList" :key="idx" v-if="tabIndex === idx" scroll-y
+			 @scrolltolower="loadMore(idx)">
+				<view  v-for="item in message">
+					<message-detail class="message-one" v-bind:messageinfo="item"></message-detail>
+				</view>
+				<view class="uni-tab-bar-loading">
+					<view class="loading-more">{{loadingText}}</view>
+				</view>
+			</scroll-view>
         </view>
 	</view>
 </template>
@@ -51,20 +65,67 @@
 					{ typename: '程序员', detail: 'Vue.js是基于JS的移动端框架', name: '啊强' },
 					{ typename: '情感', detail: '无聊', name: '啊强' },
 					{ typename: '电影', detail: '哥斯拉2还没看', name: '啊强' }
-				]
+				],
+				loadingText: {
+					contentdown: '上拉加载更多',
+					contentrefresh: '正在加载...',
+					contentnomore: '没有更多数据了'
+				},
+				scrollLeft: 0,
+				refreshing: false,
+				refreshText: '下拉可以刷新',
+				newsList: [],
+				tabIndex: 0,
+				tabBars: [{
+					name: '推荐',
+					id: 0,
+					ref: 'new'
+				}, {
+					name: '附近',
+					id: 23,
+					ref: 'company'
+				}, ]
 			}
 		},
 		components: {
 			circleButton,
 			messageDetail
 		},
-		onLoad() {
-
+		onLoad: function() {
+			// 初始化列表信息
+			this.tabBars.forEach((tabBar) => {
+				this.newsList.push({
+					data: [],
+					requestParams: {
+						columnId: tabBar.id,
+						minId: 0,
+						pageSize: 10,
+					},
+					loadingText: '加载中...'
+				});
+			});
 		},
 		methods: {
             showmore: function() {
 				alert('点击了更多')
-			}
+			},
+			loadMore() {
+				console.log('load more');
+				this.getList(2);
+			},
+			async tapTab(index) { 
+				if (this.tabIndex === index) {
+					return false;
+				} else {
+					console.log('ssss')
+					this.tabIndex = index;
+					// 首次切换后加载数据
+					const activeTab = this.newsList[this.tabIndex];
+					// if (activeTab.data.length === 0) {
+					// 	this.getList();
+					// }
+				}
+			},
 		},
 		onNavigationBarSearchInputChanged() {
 		    plus.nativeUI.alert('TBD')
@@ -139,6 +200,38 @@
 	}
 	.message-one {
 		height: auto;
+		margin-bottom: 10upx;
+	}
+	.uni-swiper-tab {
+		width: 100%;
+		white-space: nowrap;
+		line-height: 70upx;
+		height: 70upx;
+		background: #FFFFFF;
+		left: 0;
 	}
 
+	.swiper-tab-list {
+		font-size: 30upx;
+		width: 100upx;
+		display: inline-block;
+		text-align: center;
+		color: #555;
+		float: left;
+
+	}
+	.active {
+		border-bottom: 3px solid #eeee00;	
+		color: #000000;
+	}
+	.uni-tab-bar-loading {
+		text-align: center;
+		padding: 20upx 0;
+		font-size: 14px;
+		color: #CCCCCC;
+	}
+    .list {
+		width: 750upx;
+		height: auto;
+	}
 </style>

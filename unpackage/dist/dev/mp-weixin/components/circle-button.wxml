@@ -1,1 +1,0 @@
-<view data-event-opts="{{[['tap',[['showmore',['$event']]]]]}}" class="ccl" bindtap="__e" bind:__l="__l"><image class="circle-icon " src="{{circlename.img}}"></image><view class="_br"></view><text class="circle-text">{{circlename.typename}}</text></view>

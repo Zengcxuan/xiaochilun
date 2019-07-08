@@ -1,7 +1,0 @@
-{
-  "navigationBarBackgroundColor": "#eeee00",
-  "usingComponents": {
-    "circle-button": "/components/circle-button",
-    "message-detail": "/components/message-detail"
-  }
-}

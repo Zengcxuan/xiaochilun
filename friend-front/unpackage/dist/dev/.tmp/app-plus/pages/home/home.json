@@ -1,0 +1,18 @@
+{
+  "navigationBarBackgroundColor": "#FFE411",
+  "bounce": "none",
+  "titleNView": {
+    "searchInput": {
+      "align": "left",
+      "placeholder": "发现更多",
+      "backgroundColor": "#fff",
+      "disabled": "ture"
+    }
+  },
+  "usingComponents": {
+    "circle-button": "/components/circle-button",
+    "single-message": "/components/single-message",
+    "uni-media-list": "/components/uni-media-list/uni-media-list",
+    "uni-load-more": "/components/uni-load-more/uni-load-more"
+  }
+}

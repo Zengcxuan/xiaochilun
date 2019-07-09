@@ -1,0 +1,1 @@
+<view bind:__l="__l"><text>"这是搜索栏"</text></view>

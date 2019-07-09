@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+
+    <head>
+        <meta charset="UTF-8" />
+        <script>
+            var coverSupport = 'CSS' in window && typeof CSS.supports === 'function' && (CSS.supports('top: env(a)') ||
+                CSS.supports('top: constant(a)'))
+            document.write(
+                '<meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0' +
+                (coverSupport ? ', viewport-fit=cover' : '') + '" />')
+        </script>
+        <title>View</title>
+        <style>
+            * {
+                -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
+                -webkit-tap-highlight-color: transparent;
+            }
+
+            input[type="search"i]::-webkit-search-cancel-button {
+                display: none;
+            }
+        </style>
+        <script>
+            var __wxConfig = {"debug":false,"appname":"friend","entryPagePath":"pages/login/login.html","page":{"pages/login/login.html":{"window":{"navigationBarBackgroundColor":"white","navigationBarTitleText":"","usingComponents":{}}},"pages/login/register.html":{"window":{"navigationBarTitleText":"用户注册","usingComponents":{}}},"pages/login/find-pwd.html":{"window":{"navigationBarTitleText":"找回密码","usingComponents":{}}},"pages/home/home.html":{"window":{"navigationBarBackgroundColor":"#FFE411","bounce":"none","titleNView":{"searchInput":{"align":"left","placeholder":"发现更多","backgroundColor":"#fff","disabled":"ture"}},"usingComponents":{"circle-button":"/components/circle-button","single-message":"/components/single-message","uni-media-list":"/components/uni-media-list/uni-media-list","uni-load-more":"/components/uni-load-more/uni-load-more"}}},"pages/home/search/search-input.html":{"window":{"animationType":"slide-in-top","animationDuration":300,"usingComponents":{}}},"pages/home/detail/message-detail.html":{"window":{"usingComponents":{}}},"pages/dynamic/dynamic.html":{"window":{"usingComponents":{}}},"pages/publish/publish.html":{"window":{"usingComponents":{}}},"pages/chat/chat.html":{"window":{"usingComponents":{}}},"pages/mine/mine.html":{"window":{"navigationBarBackgroundColor":"#FFE411","navigationBarTitleText":"","usingComponents":{}}},"pages/mine/setting.html":{"window":{"navigationBarTitleText":"设置","usingComponents":{}}}},"global":{"window":{"navigationStyle":"default","navigationBarTextStyle":"black","navigationBarBackgroundColor":"#FFFFFF","backgroundColor":"#EFF3F6"}},"tabBar":{"color":"#848484","selectedColor":"#404040","backgroundColor":"#ffffff","borderStyle":"black","list":[{"pagePath":"pages/home/home.html","text":"首页","iconPath":"static/img/tabbar/tab_home.png","selectedIconPath":"static/img/tabbar/tab_home_selected.png"},{"pagePath":"pages/dynamic/dynamic.html","text":"动态","iconPath":"static/img/tabbar/tab_dynamic.png","selectedIconPath":"static/img/tabbar/tab_dynamic_selected.png"},{"pagePath":"pages/publish/publish.html","iconPath":"static/img/tabbar/tab_publish.png","selectedIconPath":"static/img/tabbar/tab_publish.png"},{"pagePath":"pages/chat/chat.html","text":"聊天","iconPath":"static/img/tabbar/tab_chat.png","selectedIconPath":"static/img/tabbar/tab_chat_selected.png"},{"pagePath":"pages/mine/mine.html","text":"我的","iconPath":"static/img/tabbar/tab_mine.png","selectedIconPath":"static/img/tabbar/tab_mine_selected.png"}],"position":"bottom"},"networkTimeout":{"request":60000,"connectSocket":60000,"uploadFile":60000,"downloadFile":60000},"platform":"devtools","pages":["pages/login/login","pages/login/register","pages/login/find-pwd","pages/home/home","pages/home/search/search-input","pages/home/detail/message-detail","pages/dynamic/dynamic","pages/publish/publish","pages/chat/chat","pages/mine/mine","pages/mine/setting"],"subPackages":[],"splashscreen":{"alwaysShowBeforeRender":true,"autoclose":false},"compilerVersion":"1.9.9","usingComponents":{}}
+        </script>
+        <script>
+            var __id__ = '';
+            window.__dispatchGenerateFunc__ = function(page) {
+                __id__ = page;
+                document.title = page;
+                // window.history.pushState('', '', page);
+                var wxss = page.replace('.html', '.wxss')
+                if (
+                    typeof __wxAppCode__ !== 'undefined' &&
+                    __wxAppCode__.hasOwnProperty(wxss)
+                ) {
+                    var setCssToHead = __wxAppCode__[wxss]
+                    typeof setCssToHead === 'function' && setCssToHead()
+                    document.dispatchEvent(new CustomEvent("generateFuncReady", {
+                        detail: {
+                            generateFunc: $gwx(page.replace('.html', '.wxml'))
+                        }
+                    }));
+                } else {
+                    plus.webview.currentWebview().setJsFile('_www/' + page.replace('.html', '.js'));
+                }
+            };
+        </script>
+        <script src="__uniappes6.js"></script>
+        <script src="uniapp://ready"></script>
+    </head>
+
+    <body>
+        <div></div>
+    </body>
+
+</html>

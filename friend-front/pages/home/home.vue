@@ -20,7 +20,7 @@
 			<scroll-view class="list" v-for="(tabItem, idx) in newsList" :key="idx" v-if="tabIndex === idx" scroll-y
 			 @scrolltolower="loadMore(idx)">
 				<block v-for="(newsItem, newsIndex) in tabItem.data" :key="newsIndex">
-					<single-message class="message-one" :msg="newsItem" @click="goDetail(newsItem)"></single-message>
+					<single-message class="message-one" :msg="newsItem"></single-message>
 				</block>
 				<view class="uni-tab-bar-loading">
 					<view class="loading-more"> {{ loadingText }} </view>
@@ -141,13 +141,6 @@
 					}
 				});
 			},
-			// 查看详情
-			goDetail(detail) {
-				console.log('go detail');
-				uni.navigateTo({
-					url: '/pages/home/detail/message-detail?query=' + encodeURIComponent(JSON.stringify(detail))
-				});
-			},
 			dislike(tabIndex, newsIndex) {
 				uni.showModal({
 					content: '不感兴趣？',
@@ -257,7 +250,6 @@
 	}
 	.content {
 		height: 100%;
-
 	}
 /* 	我的圈子部分 */
     .my-circles {
@@ -344,7 +336,6 @@
     .list {
 		z-index: 1;
 		width: 750upx;
-/* 		background: rgb(0, 235, 235); */
 		height: calc(100% - 100upx);
 	}
 </style>

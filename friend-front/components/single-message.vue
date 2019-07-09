@@ -1,6 +1,6 @@
 <template>
 	<view class="msg-content" @click="bindClick">
-		<view class="circle-type">
+		<view class="circle-type" @click="goCirecle(msg)">
 			<image class="circle-img" :src="msg.image_url" ></image>
 			<text class="circle-name">{{ msg.post_id }}</text>
 			<view class="circle-client">
@@ -11,11 +11,11 @@
 			</view>
 			
 		</view>
-		<view class="message-detail">
+		<view class="message-detail" @click="goDetail(msg)">
 			<text class="message-text">{{ msg.title }}</text>
             <!-- 			加一个view放图片 -->
 		</view>
-		<view class="message-belong">
+		<view class="message-belong" @click="goUser(msg)">
 			<image class="head" src="/static/img/home/head/man.png" ></image>
 			<view style="width: auto; height: 60upx; position: relative; left:70upx; margin-top: 25upx; white-space: nowrap; display: flex; flex: 1; flex-direction: row;">
 				<text class="name"> {{ msg.source }} </text>
@@ -23,16 +23,16 @@
 			</view>
 		</view>
 		<view class="message-modify">
-			<view class="message-modify-module">
-				<image class="modify-icon" src="/static/img/home/msg/good.png" mode=""></image>
+			<view class="message-modify-module" @click="clickGood(msg)">
+				<image class="modify-icon" src="/static/img/home/msg/good.png" ></image>
 				<text class="comments-count">999</text>
 			</view>
-			<view class="message-modify-module">
-				<image class="modify-icon" src="/static/img/home/msg/word.png" mode=""></image>
+			<view class="message-modify-module" @click="clickComment(msg)">
+				<image class="modify-icon" src="/static/img/home/msg/comment.png"></image>
 				<text class="comments-count">{{msg.comments_count}}</text>
 			</view>
-			<view class="message-modify-module">
-				<image class="modify-icon" src="/static/img/home/msg/out.png" mode=""></image>
+			<view class="message-modify-module" @click="clickForward(msg)">
+				<image class="modify-icon" src="/static/img/home/msg/forward.png"></image>
 				<text class="comments-count">999</text>
 			</view>			
 			<image src="/static/img/home/msg/more.png" style="position: absolute; right: 5upx; height: 40upx; width: 40upx;" mode=""></image>
@@ -55,7 +55,28 @@
 		methods: {
 		    close(e) {
 		        this.$emit('close');
-		    },
+		    },			// 查看详情
+			goDetail(detail) {
+				console.log('go detail');
+				uni.navigateTo({
+					url: '/pages/home/detail/message-detail?query=' + encodeURIComponent(JSON.stringify(detail))
+				});
+			},
+			goCirecle(detail) {
+				console.log('go circle');
+			},
+			goUser(detail) {
+				console.log('go user');
+			},
+			clickGood(detail) {
+				console.log('click good');
+			},
+			clickComment(detail) {
+				console.log('click comment');
+			},
+			clickForward(detail) {
+				console.log('click forward');
+			},
 		    bindClick() {
 		        this.$emit('click');
 		    }
@@ -106,13 +127,11 @@
 	.message-detail {
 		width: 100%;
 		height: auto;
-/* 		padding: 20upx; */
 		overflow: auto;
 	}
 	.message-text {
 		width: auto;
 		height: auto;
-		float: left;
 		margin: 20upx;
 	}
 	.message-belong {

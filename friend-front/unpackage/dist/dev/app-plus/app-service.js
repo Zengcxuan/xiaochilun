@@ -11647,7 +11647,6 @@ define('components/single-message.js',function(require, module, exports, window,
       //
       //
       //
-      //
       var _default2 =
       {
         name: 'message-detail',
@@ -11665,25 +11664,25 @@ define('components/single-message.js',function(require, module, exports, window,
             this.$emit('close');
           }, // 查看详情
           goDetail: function goDetail(detail) {
-            console.log('go detail', " at components\\single-message.vue:60");
+            console.log('go detail', " at components\\single-message.vue:59");
             uni.navigateTo({
               url: '/pages/home/detail/message-detail?query=' + encodeURIComponent(JSON.stringify(detail)) });
 
           },
           goCirecle: function goCirecle(detail) {
-            console.log('go circle', " at components\\single-message.vue:66");
+            console.log('go circle', " at components\\single-message.vue:65");
           },
           goUser: function goUser(detail) {
-            console.log('go user', " at components\\single-message.vue:69");
+            console.log('go user', " at components\\single-message.vue:68");
           },
           clickGood: function clickGood(detail) {
-            console.log('click good', " at components\\single-message.vue:72");
+            console.log('click good', " at components\\single-message.vue:71");
           },
           clickComment: function clickComment(detail) {
-            console.log('click comment', " at components\\single-message.vue:75");
+            console.log('click comment', " at components\\single-message.vue:74");
           },
           clickForward: function clickForward(detail) {
-            console.log('click forward', " at components\\single-message.vue:78");
+            console.log('click forward', " at components\\single-message.vue:77");
           },
           bindClick: function bindClick() {
             this.$emit('click');
@@ -13468,6 +13467,28 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 
 var FAIL_CONTENT = '<p>获取信息失败</p>';var _default =
 {
@@ -13478,7 +13499,8 @@ var FAIL_CONTENT = '<p>获取信息失败</p>';var _default =
       isFollow: false,
       followText: '关注',
       isCollect: false,
-      joinText: '加入' };
+      joinText: '加入',
+      isJoin: false };
 
   },
   computed: {
@@ -13528,10 +13550,10 @@ var FAIL_CONTENT = '<p>获取信息失败</p>';var _default =
     changeFollow: function changeFollow() {
       if (this.isFollow) {
         this.followText = '关注';
-        console.log('unfollow', " at pages\\home\\detail\\message-detail.vue:86");
+        console.log('unfollow', " at pages\\home\\detail\\message-detail.vue:109");
       } else {
         this.followText = '已关注';
-        console.log('follow', " at pages\\home\\detail\\message-detail.vue:89");
+        console.log('follow', " at pages\\home\\detail\\message-detail.vue:112");
       }
       this.isFollow = !this.isFollow;
       //isFollow改变需要传给后台
@@ -13539,14 +13561,29 @@ var FAIL_CONTENT = '<p>获取信息失败</p>';var _default =
     changeCollect: function changeCollect() {
       if (this.isCollect) {
         //需要加一个弹框确定取消收藏
-        console.log('cancel collect', " at pages\\home\\detail\\message-detail.vue:97");
+        console.log('cancel collect', " at pages\\home\\detail\\message-detail.vue:120");
       } else {
-        console.log('collect', " at pages\\home\\detail\\message-detail.vue:99");
+        console.log('collect', " at pages\\home\\detail\\message-detail.vue:122");
       }
       this.isCollect = !this.isCollect;
     },
     changeJoin: function changeJoin() {
-      console.log('click Join in', " at pages\\home\\detail\\message-detail.vue:104");
+      if (this.isJoin) {
+        console.log('go to see', " at pages\\home\\detail\\message-detail.vue:128");
+      } else {
+        this.followText = '去看看';
+        this.isJoin = true;
+      }
+
+    },
+    clickGood: function clickGood(detail) {
+      console.log('click good', " at pages\\home\\detail\\message-detail.vue:136");
+    },
+    clickComment: function clickComment(detail) {
+      console.log('click comment', " at pages\\home\\detail\\message-detail.vue:139");
+    },
+    clickForward: function clickForward(detail) {
+      console.log('click forward', " at pages\\home\\detail\\message-detail.vue:142");
     } } };exports.default = _default;
 /* WEBPACK VAR INJECTION */}.call(this, __webpack_require__(/*! ./node_modules/@dcloudio/uni-app-plus/dist/index.js */ "./node_modules/@dcloudio/uni-app-plus/dist/index.js")["default"]))
 

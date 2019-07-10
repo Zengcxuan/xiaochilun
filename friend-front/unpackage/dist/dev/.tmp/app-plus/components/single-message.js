@@ -139,7 +139,6 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
-//
 var _default2 =
 {
   name: 'message-detail',
@@ -157,25 +156,25 @@ var _default2 =
       this.$emit('close');
     }, // 查看详情
     goDetail: function goDetail(detail) {
-      console.log('go detail', " at components\\single-message.vue:60");
+      console.log('go detail', " at components\\single-message.vue:59");
       uni.navigateTo({
         url: '/pages/home/detail/message-detail?query=' + encodeURIComponent(JSON.stringify(detail)) });
 
     },
     goCirecle: function goCirecle(detail) {
-      console.log('go circle', " at components\\single-message.vue:66");
+      console.log('go circle', " at components\\single-message.vue:65");
     },
     goUser: function goUser(detail) {
-      console.log('go user', " at components\\single-message.vue:69");
+      console.log('go user', " at components\\single-message.vue:68");
     },
     clickGood: function clickGood(detail) {
-      console.log('click good', " at components\\single-message.vue:72");
+      console.log('click good', " at components\\single-message.vue:71");
     },
     clickComment: function clickComment(detail) {
-      console.log('click comment', " at components\\single-message.vue:75");
+      console.log('click comment', " at components\\single-message.vue:74");
     },
     clickForward: function clickForward(detail) {
-      console.log('click forward', " at components\\single-message.vue:78");
+      console.log('click forward', " at components\\single-message.vue:77");
     },
     bindClick: function bindClick() {
       this.$emit('click');

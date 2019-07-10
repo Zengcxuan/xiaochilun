@@ -26,11 +26,11 @@
 /* 文章场景相关 */
 /* 标题栏背景色 add by yangning.hong */
 /* 页面背景色 add by yangning.hong */
-.msg-content.data-v-00f9bef7 {
+.single-message-content.data-v-00f9bef7 {
   background: white;
   border-bottom: solid 15rpx #e6e6e6;
 }
-.circle-type.data-v-00f9bef7 {
+.single-messaget-circle.data-v-00f9bef7 {
   height: 100rpx;
   width: 100%;
   background: whitesmoke;
@@ -49,19 +49,19 @@
       -ms-flex-direction: row;
           flex-direction: row;
 }
-.circle-img.data-v-00f9bef7 {
+.single-messaget-circle_img.data-v-00f9bef7 {
   height: 70rpx;
   width: 70rpx;
   position: relative;
   margin: 15rpx;
 }
-.circle-name.data-v-00f9bef7 {
+.single-messaget-circle_name.data-v-00f9bef7 {
   width: auto;
   position: relative;
   text-align: center;
   margin-top: 15rpx;
 }
-.circle-client.data-v-00f9bef7 {
+.single-message-circle-user.data-v-00f9bef7 {
   position: absolute;
   right: 10rpx;
   height: 50rpx;
@@ -69,23 +69,23 @@
   margin-top: 25rpx;
   margin-right: 10rpx;
 }
-.right-icon.data-v-00f9bef7 {
+.single-message-circle-user_righticon.data-v-00f9bef7 {
   height: 50rpx;
   width: 50rpx;
   position: absolute;
   right: 10rpx;
 }
-.message-detail.data-v-00f9bef7 {
+.single-message-content.data-v-00f9bef7 {
   width: 100%;
   height: auto;
   overflow: auto;
 }
-.message-text.data-v-00f9bef7 {
+.single-message-content_detail.data-v-00f9bef7 {
   width: auto;
   height: auto;
   margin: 20rpx;
 }
-.message-belong.data-v-00f9bef7 {
+.single-message-belong.data-v-00f9bef7 {
   width: auto;
   height: 90rpx;
   margin-left: 15rpx;
@@ -99,27 +99,27 @@
   -webkit-flex-direction: row;
       -ms-flex-direction: row;
           flex-direction: row;
-  border-bottom: solid 3rpx #c8c8c8;
+  border-bottom: solid 3rpx whitesmoke;
 }
-.head.data-v-00f9bef7 {
+.single-message-belong_head.data-v-00f9bef7 {
   height: 50rpx;
   width: 50rpx;
   position: absolute;
   margin-top: 20rpx;
 }
-.name.data-v-00f9bef7 {
+.single-message-belong_name.data-v-00f9bef7 {
   width: auto;
   display: inline-block;
   font-size: 20rpx;
 }
-.send.data-v-00f9bef7 {
+.single-message-belong_send.data-v-00f9bef7 {
   position: relative;
   left: 10rpx;
   display: inline-block;
   color: #c8c8c8;
   font-size: 20rpx;
 }
-.message-modify.data-v-00f9bef7 {
+.single-message-modify.data-v-00f9bef7 {
   width: 100%;
   height: auto;
   white-space: nowrap;
@@ -138,7 +138,7 @@
           flex-direction: row;
   padding: 15rpx;
 }
-.message-modify-module.data-v-00f9bef7 {
+.single-message-modify-module.data-v-00f9bef7 {
   width: 200rpx;
   height: auto;
   display: inline-block;
@@ -156,11 +156,11 @@
       -ms-flex-direction: row;
           flex-direction: row;
 }
-.modify-icon.data-v-00f9bef7 {
+.single-message-modify-module_icon.data-v-00f9bef7 {
   height: 30rpx;
   width: 30rpx;
 }
-.comments-count.data-v-00f9bef7 {
+.single-message-modify-module_count.data-v-00f9bef7 {
   height: 30rpx;
   width: auto;
   -webkit-text-emphasis-color: #000000;

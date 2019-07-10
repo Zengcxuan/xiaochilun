@@ -1,26 +1,48 @@
 <template>
-    <view class="msg-detail-top">
-    	<view class="msg-detail-belong">
-    		<image class="msg-detail-head" :src="msg.image_url" ></image>
-			<text class="msg-detail-src"> {{ msg.source }} </text>
-	 		<button class="msg-follow-button" size="mini" :class="computedIsActive" @click="changeFollow"> {{ followText }} </button>
-    	    <image class="msg-detail-collect" :src="computedIsCollect" @click="changeCollect"></image>
+	<view>
+		<view class="msg-detail-top">
+			<view class="msg-detail-top-belong">
+				<image class="msg-detail-top-belong_head" :src="msg.image_url" ></image>
+				<text class="msg-detail-top-belong_src"> {{ msg.source }} </text>
+				<button class="msg-detail-top-belong_button" size="mini" :class="computedIsActive" @click="changeFollow"> {{ followText }} </button>
+				<image class="msg-detail-top-belong_collect" :src="computedIsCollect" @click="changeCollect"></image>
+			</view>
+			<view class="msg-detail-top-content">
+				<text class="msg-detail-top-content_text"> {{ msg.title }} </text>
+			</view>
+			<view class="msg-detail-top-circle">
+				<image class="msg-detail-top-circle_img" :src="msg.image_url"></image>
+				<text class="msg-detail-top-circle_text"> {{ msg.source }} </text>
+				<button class="msg-detail-top-circle_join" size="mini" @click="changeJoin"> {{ joinText }} </button>
+			</view>
+			<view class="msg-detail-top-border"></view>
+			<view class="msg-detail-top-modify">
+				<view class="msg-detail-top-modify_module" @click="clickGood(msg)">
+					<image class="msg-detail-top-modify_icon" src="/static/img/home/msg/good.png" ></image>
+					<text class="msg-detail-top-modify_count">999</text>
+				</view>
+				<view class="msg-detail-top-modify_module" @click="clickComment(msg)">
+					<image class="msg-detail-top-modify_icon" src="/static/img/home/msg/comment.png"></image>
+					<text class="msg-detail-top-modify_count">{{msg.comments_count}}</text>
+				</view>
+				<view class="msg-detail-top-modify_module" @click="clickForward(msg)">
+					<image class="msg-detail-top-modify_icon" src="/static/img/home/msg/forward.png"></image>
+					<text class="msg-detail-top-modify_count">999</text>
+				</view>			
+				<image src="/static/img/home/msg/more.png" style="position: absolute; right: 20upx; height: 40upx; width: 40upx;" mode=""></image>
+			</view>
 		</view>
-		<view class="msg-detail-content">
-			<text class="msg-detail-text"> {{ msg.title }} </text>
+		
+		<view class="msg-detail-center">
+			<view class="msg-detail-center-title">
+				<text class="msg-detail-center-title_text" style="margin: 20upx; text-align: 25upx; position: relative;">相关推荐</text>
+			</view>
+			<view class="msg-detail-center-content">
+				<!-- 滑动框 -->
+			</view>
 		</view>
-		<view class="msg-detail-circle">
-			<image class="msg-circle-img" :src="msg.image_url"></image>
-			<text class="msg-circle-text"> {{ msg.source }} </text>
-			<button class="msg-circle-join" size="mini" @click="changeJoin"> {{ joinText }} </button>
-		</view>
-		<view class="msg-detail-modify">
-			
-		</view>
-    </view>
-<!-- 		<view class="article-content">
-			<rich-text :nodes="content"></rich-text>
-		</view> -->
+	</view>
+    
 </template>
 
 <script>
@@ -33,7 +55,8 @@
 				isFollow: false,
 				followText: '关注',
 				isCollect: false,
-				joinText: '加入'
+				joinText: '加入',
+				isJoin: false
 			}
 		},
 		computed: {
@@ -101,7 +124,22 @@
                 this.isCollect = !(this.isCollect);
 			},
 			changeJoin() {
-				console.log('click Join in');
+				if (this.isJoin){
+					console.log('go to see');
+				} else {
+					this.followText = '去看看';
+					this.isJoin = true;
+				}
+				
+			},
+			clickGood(detail) {
+				console.log('click good');
+			},
+			clickComment(detail) {
+				console.log('click comment');
+			},
+			clickForward(detail) {
+				console.log('click forward');
 			}
 		}
 	}
@@ -116,7 +154,7 @@
 		background: rgb(255, 255, 255);
 	}
 	//belong部分
-	.msg-detail-belong {
+	.msg-detail-top-belong {
 		height: 100upx;
 		width: 100%;
 		background: white;
@@ -125,19 +163,19 @@
 		flex: 1;
 		flex-direction: row;
 	}
-	.msg-detail-head {
+	.msg-detail-top-belong_head {
 		height: 70upx;
 		width: 70upx;
 		position:relative;
 		margin: 15upx;
 	}
-	.msg-detail-src {
+	.msg-detail-top-belong_src {
 		width: auto;
 		display: inline-block;
 		font-size: 30upx;
 		margin-top: 15upx;
 	}
-	.msg-follow-button {
+	.msg-detail-top-belong_button {
 		height: 60upx;
 		width: 130upx;
 		position: absolute;
@@ -153,7 +191,7 @@
 	.followed {
 		background-color: grey;
 	}
-	.msg-detail-collect {
+	.msg-detail-top-belong_collect {
 		height: 60upx;
 		width: 60upx;
 		position: absolute;
@@ -161,19 +199,19 @@
 		right: 20upx;
 	}
 	//content部分
-	.msg-detail-content {
+	.msg-detail-top-content {
 		width: 100%;
 		height: auto;
 		overflow: auto;
 	}
-	.msg-detail-text {
+	.msg-detail-top-content_text {
 		width: auto;
 		height: auto;
 		float: left;
 		margin: 20upx;
 	}
 	//circle部分
-	.msg-detail-circle {
+	.msg-detail-top-circle {
 		height: 100upx;
 		width: calc(100%-40upx);
 		margin: 20upx;
@@ -184,19 +222,19 @@
 		flex-direction: row;
 		background: rgb(245, 245, 245);
 	}
-	.msg-circle-img {
+	.msg-detail-top-circle_img {
 		height: 70upx;
 		width: 70upx;
 		position:relative;
 		margin: 15upx;	
 	}
-	.msg-circle-text {
+	.msg-detail-top-circle_text {
 		width: auto;
 		display: inline-block;
 		font-size: 30upx;
 		margin-top: 15upx;
 	}
-	.msg-circle-join {
+	.msg-detail-top-circle_join {
 		height: 60upx;
 		width: 130upx;
 		position:relative;
@@ -209,5 +247,45 @@
 		background-color: white;
 		border-radius: 50upx;	
 		border: solid 1upx cornflowerblue;
+	}
+	.msg-detail-top-border {
+		margin-left: 20upx;
+		margin-right: 20upx;
+		width: calc(100%-40upx);
+		border: solid 2upx rgb(245, 245, 245);
+	}
+	//评论部分
+	.msg-detail-top-modify {
+		width: 100%;
+		height: auto;
+		white-space: nowrap;
+		display: flex;
+		flex: 1;
+		flex-direction: row;
+		padding: 15upx;
+	}
+	.msg-detail-top-modify_module {
+		width: 200upx;
+		height: auto;
+		display:inline-block;
+		display: flex;
+		flex: 1;
+		flex-direction: row;
+	}
+	.msg-detail-top-modify_icon {
+		height: 30upx;
+		width: 30upx;
+	}
+	.msg-detail-top-modify_count {
+		height: 30upx;
+		width: auto;
+		text-emphasis-color: #000000;
+	}
+	//推荐部分
+	.msg-detail-center {
+		height: 100upx;
+		width: 100%;
+		border: solid 2upx rgb(245, 245, 245);
+		background: rgb(255, 255, 255);
 	}
 </style>

@@ -1,39 +1,50 @@
 <template>
-	<view class="msg-content" @click="bindClick">
-		<view class="circle-type" @click="goCirecle(msg)">
-			<image class="circle-img" :src="msg.image_url" ></image>
-			<text class="circle-name">{{ msg.post_id }}</text>
-			<view class="circle-client">
-				<image src="/static/img/home/head/man.png" class="user-head" style="height: 50upx; width: 50upx; z-index: 3; position: absolute; right: 70upx; border: #ffffff;"></image>
-				<image src="/static/img/home/head/woman.png" class="user-head" style="height: 50upx; width: 50upx; z-index: 2; position: absolute; right: 110upx; border: #ffffff;"></image>
-				<image src="/static/img/home/head/man.png" class="user-head" style="height: 50upx; width: 50upx; z-index: 1; position: absolute; right: 150upx; border: #ffffff;"></image>
-			    <image class="right-icon" src="/static/img/home/rightarrow.png" ></image>
+	<view class="single-message" @click="bindClick">
+		<view class="single-message-circle" @click="goCirecle(msg)" v-if="tp === 1" style="background: rgb(245, 245, 245);">
+			<image class="single-message-circle_img" :src="msg.image_url" ></image>
+			<view style="display: flex; flex: 1; flex-direction: column; position: absolute; left: 120upx;">
+				<text class="single-message-circle_name">{{ msg.post_id }}</text>
+				<text class="single-message-circle_usernumber" style="color: rgb(0, 255, 0);">1万名即友加入</text>	
 			</view>
-			
+			<view class="single-message-circle-user">
+				<image src="/static/img/home/head/man.png" class="single-message-circle-user_head" style="height: 50upx; width: 50upx; z-index: 3; position: absolute; right: 70upx; border: #ffffff;"></image>
+				<image src="/static/img/home/head/woman.png" class="single-message-circle-user_head" style="height: 50upx; width: 50upx; z-index: 2; position: absolute; right: 110upx; border: #ffffff;"></image>
+				<image src="/static/img/home/head/man.png" class="single-message-circle-user_head" style="height: 50upx; width: 50upx; z-index: 1; position: absolute; right: 150upx; border: #ffffff;"></image>
+			    <image class="single-message-circle-user_righticon" src="/static/img/home/rightarrow.png" ></image>
+			</view>
 		</view>
-		<view class="message-detail" @click="goDetail(msg)">
-			<text class="message-text">{{ msg.title }}</text>
+		<!-- type == 2 begin -->
+		<view class="single-message-circle" v-if="tp === 2">
+			<image class="single-message-circle_img" :src="msg.image_url" ></image>
+			<view style="display: flex; flex: 1; flex-direction: column; position: absolute; left: 120upx;">
+				<text class="single-message-circle_name">{{ msg.post_id }}</text>
+				<text class="single-message-circle_usernumber" style="color: rgb(200, 200, 200);">05/22</text>
+			</view>
+		</view>
+		<!-- type == 2 End -->
+		<view class="single-message-content" @click="goDetail(msg)">
+			<text class="single-message-content_detail">{{ msg.title }}</text>
             <!-- 			加一个view放图片 -->
 		</view>
-		<view class="message-belong" @click="goUser(msg)">
-			<image class="head" src="/static/img/home/head/man.png" ></image>
+		<view class="single-message-belong" @click="goUser(msg)" v-if="tp === 1">
+			<image class="single-message-belong_head" src="/static/img/home/head/man.png" ></image>
 			<view style="width: auto; height: 60upx; position: relative; left:70upx; margin-top: 25upx; white-space: nowrap; display: flex; flex: 1; flex-direction: row;">
-				<text class="name"> {{ msg.source }} </text>
-				<text class="send"> 发布 </text>	
+				<text class="single-message-belong_name"> {{ msg.source }} </text>
+				<text class="single-message-belong_send"> 发布 </text>	
 			</view>
 		</view>
-		<view class="message-modify">
-			<view class="message-modify-module" @click="clickGood(msg)">
-				<image class="modify-icon" src="/static/img/home/msg/good.png" ></image>
-				<text class="comments-count">999</text>
+		<view class="single-message-modify">
+			<view class="single-message-modify-module" @click="clickGood(msg)">
+				<image class="single-message-modify-module_icon" src="/static/img/home/msg/good.png" ></image>
+				<text class="single-message-modify-module_count">999</text>
 			</view>
-			<view class="message-modify-module" @click="clickComment(msg)">
-				<image class="modify-icon" src="/static/img/home/msg/comment.png"></image>
-				<text class="comments-count">{{msg.comments_count}}</text>
+			<view class="single-message-modify-module" @click="clickComment(msg)">
+				<image class="single-message-modify-module_icon" src="/static/img/home/msg/comment.png"></image>
+				<text class="single-message-modify-module_count">{{msg.comments_count}}</text>
 			</view>
-			<view class="message-modify-module" @click="clickForward(msg)">
-				<image class="modify-icon" src="/static/img/home/msg/forward.png"></image>
-				<text class="comments-count">999</text>
+			<view class="single-message-modify-module" @click="clickForward(msg)">
+				<image class="single-message-modify-module_icon" src="/static/img/home/msg/forward.png"></image>
+				<text class="single-message-modify-module_count">999</text>
 			</view>			
 			<image src="/static/img/home/msg/more.png" style="position: absolute; right: 5upx; height: 40upx; width: 40upx;" mode=""></image>
 		</view>
@@ -50,7 +61,13 @@
                 default: function(e) {
                     return {}
                 }
-            }
+            },
+			tp: {
+				type: Number,
+				default: function(e) {
+					return {}
+				}
+			}
         },
 		methods: {
 		    close(e) {
@@ -85,32 +102,40 @@
 </script>
 
 <style lang="scss" scoped>
-	.msg-content {
+	.single-message {
 		background: rgb(255,255,255);
 		border-bottom: solid 15upx rgb(230, 230, 230);
 	}
-	.circle-type {
+	.single-message-circle {
 		height: 100upx;
 		width: 100%;
-        background: rgb(245, 245, 245);
 		white-space: nowrap;
 		display: flex;
 		flex: 1;
 		flex-direction: row;
 	}
-	.circle-img {
+	.single-message-circle_img {
 		height: 70upx;
 		width: 70upx;
 		position:relative;
 		margin: 15upx;
 	}
-	.circle-name {
+	.single-message-circle_name {
 		width: auto;
 		position: relative;
-		text-align: center;
-		margin-top: 15upx;
+		text-align: left;
+		height: auto;
+		font-size: 30upx;
+		top: 15upx;
 	}
-	.circle-client {
+	.single-message-circle_usernumber {
+		width: auto;
+		height: auto;
+		position: relative;
+		text-align: left;
+		font-size: 10upx;
+	}
+	.single-message-circle-user {
 		position: absolute;
 		right: 10upx;
 		height: 50upx;
@@ -118,50 +143,50 @@
 		margin-top: 25upx;	
 		margin-right: 10upx;
 	}
-	.right-icon {
+	.single-message-circle-user_righticon {
 		height: 50upx;
 		width:  50upx;
 		position: absolute; 
 		right: 10upx;
 	}
-	.message-detail {
+	.single-message-content {
 		width: 100%;
 		height: auto;
 		overflow: auto;
 	}
-	.message-text {
+	.single-message-content_detail {
 		width: auto;
 		height: auto;
 		margin: 20upx;
 	}
-	.message-belong {
+	.single-message-belong {
 		width: auto;
 		height: 90upx;
 		margin-left: 15upx;
 		margin-right: 15upx;
 		display: flex;
 		flex-direction: row;
-		border-bottom: solid 3upx rgb(200, 200, 200);
+		border-bottom: solid 3upx rgb(245, 245, 245);
 	}
-	.head {
+	.single-message-belong_head {
 		height: 50upx;
 		width: 50upx;
 		position: absolute;
 		margin-top: 20upx;
 	}
-	.name {
+	.single-message-belong_name {
 		width: auto;
 		display: inline-block;
 		font-size: 20upx;
 	}
-	.send {
+	.single-message-belong_send {
 		position: relative;
 		left:10upx;
 		display: inline-block;
 		color: rgb(200, 200, 200); 
 		font-size: 20upx; 
 	}
-	.message-modify {
+	.single-message-modify {
 		width: 100%;
 		height: auto;
 		white-space: nowrap;
@@ -170,7 +195,7 @@
 		flex-direction: row;
 		padding: 15upx;
 	}
-	.message-modify-module {
+	.single-message-modify-module {
 		width: 200upx;
 		height: auto;
 		display:inline-block;
@@ -178,11 +203,11 @@
 		flex: 1;
 		flex-direction: row;
 	}
-	.modify-icon {
+	.single-message-modify-module_icon {
 		height: 30upx;
 		width: 30upx;
 	}
-	.comments-count {
+	.single-message-modify-module_count {
 		height: 30upx;
 		width: auto;
 		text-emphasis-color: #000000;

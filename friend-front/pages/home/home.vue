@@ -20,7 +20,7 @@
 			<scroll-view class="list" v-for="(tabItem, idx) in newsList" :key="idx" v-if="tabIndex === idx" scroll-y
 			 @scrolltolower="loadMore(idx)">
 				<block v-for="(newsItem, newsIndex) in tabItem.data" :key="newsIndex">
-					<single-message class="message-one" :msg="newsItem"></single-message>
+					<single-message class="message-one" :msg="newsItem" :tp="1"></single-message>
 				</block>
 				<view class="uni-tab-bar-loading">
 					<view class="loading-more"> {{ loadingText }} </view>

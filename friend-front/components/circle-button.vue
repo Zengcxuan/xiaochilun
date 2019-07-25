@@ -20,7 +20,11 @@
 		},
 		methods: {
 			showmore() {
-				// console.log('click all circle');
+				console.log(this.circlename.typename);
+				if(this.circlename.typename == '更多'){
+					uni.navigateTo({url:'/pages/home/circles/all-circles'});
+				}
+				
 			}
 		}
 	}

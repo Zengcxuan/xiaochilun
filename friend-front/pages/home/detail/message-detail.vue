@@ -41,6 +41,18 @@
 				<!-- 滑动框 -->
 			</view>
 		</view>
+		
+		<view class="msg-detail-hots">
+			<view class="msg-detail-hots-title">
+				<text class="msg-detail-hots-title_text" style="margin: 20upx; text-align: 25upx; position: relative;">热门评论</text>
+			</view>
+		</view>
+		
+		<view class="msg-detail-comments">
+			<view class="msg-detail-comments-title">
+				<text class="msg-detail-comments-title_text" style="margin: 20upx; text-align: 25upx; position: relative;">所有评论</text>
+			</view>
+		</view>
 	</view>
     
 </template>
@@ -127,7 +139,7 @@
 				if (this.isJoin){
 					console.log('go to see');
 				} else {
-					this.followText = '去看看';
+					this.joinText = '去看看';
 					this.isJoin = true;
 				}
 				
@@ -283,9 +295,21 @@
 	}
 	//推荐部分
 	.msg-detail-center {
-		height: 100upx;
+		height: 200upx;
 		width: 100%;
 		border: solid 2upx rgb(245, 245, 245);
+		background: rgb(255, 255, 255);
+	}
+	//热门评论
+	.msg-detail-hots {
+		margin-top: 10upx; 
+		height: 300upx;
+		background: rgb(255, 255, 255);
+	}
+	//所有评论
+	.msg-detail-comments {
+		margin-top: 10upx; 
+		height: 500upx;
 		background: rgb(255, 255, 255);
 	}
 </style>

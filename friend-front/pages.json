@@ -60,6 +60,22 @@
 				
 			}
 		},
+		{
+			"path": "pages/home/circles/my-circles",
+			"style":{}
+		},
+		{
+			"path": "pages/home/circles/all-circles",
+		    "style": {
+				
+			}	
+		},
+		{
+			"path": "pages/home/circles/circle-detail",
+			"style": {
+				
+			}
+		},
         {
             "path" : "pages/dynamic/dynamic",
             "style" : {}

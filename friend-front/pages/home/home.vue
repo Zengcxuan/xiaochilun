@@ -1,7 +1,7 @@
 <template>
 	<view class="content">
 		<view class="my-circles">
-			<view class="all-circles">
+			<view class="all-circles" @click="showMyCircles">
 				<text class="show-all">我的圈子</text>
 				<image class="right-icon" :src="imginfo.rightarrow" ></image>
 			</view>
@@ -151,9 +151,9 @@
 					}
 				})
 			},
-			
-            showmore() {
-				// alert('点击了更多')
+			showMyCircles() {
+				console.log('click my circles');
+                uni.navigateTo({url:'/pages/home/circles/my-circles'});
 			},
 			loadMore() {
 				console.log('load more');

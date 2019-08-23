@@ -38,7 +38,7 @@
 	import {
 		friendlyDate
 	} from './common/util.js';
-	
+	import {GetDynamic} from '../../api/api.js';
 	export default {
 		data() {
 			return {
@@ -96,7 +96,7 @@
 						columnId: tabBar.id,
 						minId: 0,
 						pageSize: 10,
-						column: 'id,post_id,title,author_name,cover,published_at,comments_count'
+						column: 'id,detail,image_url,source,good_count,comments_count,forward_count,circle_name,circle_img'
 					},
 					loadingText: '加载中...'
 				});
@@ -110,35 +110,37 @@
 				if (action === 1) {
 					activeTab.requestParams.minId = 0;
 				}
-				this.loadingText = '加载中...';
-				uni.request({
-					url: 'https://unidemo.dcloud.net.cn/api/news',
-					data: activeTab.requestParams,
-					success: (result) => {
-						if (result.statusCode == 200) {
-							const data = result.data.map((news) => {
+				GetDynamic(activeTab.requestParams).then(res => {
+						console.log(res.statusCode);
+						console.log(res.data.minId);
+						if (res.statusCode == 200) {
+							const data = res.data.dynamic.map((dynamic) => {
 								return {
-									id: news.id,
-									article_type: 1,
-									datetime: friendlyDate(new Date(news.published_at.replace(/\-/g, '/')).getTime()),
-									title: news.title,
-									image_url: news.cover,
-									source: news.author_name,
-									comment_count: news.comments_count,
-									post_id: news.post_id,
+									id: dynamic.id,
+									//datetime: friendlyDate(new Date(news.published_at.replace(/\-/g, '/')).getTime()),
+									detail: dynamic.detail,
+									image_url: dynamic.userhead,
+									source: dynamic.username,
+									good_count: dynamic.good_num,
+									comments_count: dynamic.count_num,
+									forward_count: dynamic.forward_num,
+									circle_name: dynamic.circle,
+									circle_img: dynamic.circlepicture
 								};
 							});
 							if (action === 1) {
 								activeTab.data = data;
 								this.refreshing = false;
 							} else {
-								data.forEach((news) => {
-									activeTab.data.push(news);
+								data.forEach((dynamic) => {
+									activeTab.data.push(dynamic);
 								});
 							}
 							activeTab.requestParams.minId = data[data.length - 1].id;
 						}
-					}
+				}).catch(err => {
+					console.log("get dynamic error");
+					console.log(err.errMsg);
 				});
 			},
 			dislike(tabIndex, newsIndex) {

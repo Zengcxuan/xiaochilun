@@ -54,9 +54,5 @@
             "urlCheck" : true
         },
         "usingComponents" : true
-    },
-    "h5" : {
-        "title" : "friend",
-        "domain" : "canxuantest.com"
     }
 }

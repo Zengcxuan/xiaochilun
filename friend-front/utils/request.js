@@ -5,12 +5,17 @@
  * @Date 2019-06-05
  * @Email webwork.s@qq.com
  * **/
+import store from '../store'
+
 export default class Request {
   config = {
-		//此处设置服务器的baseUrl
-    baseUrl: 'https://www.easy-mock.com/mock/5d012c5714111246cf6c1376/example',
+    //此处设置服务器的baseUrl
+    //局域网EasyMock测试账号：yangning.hong 密码Aa123456
+	  baseUrl: 'http://10.92.34.48:7300/mock/5d26e44c19ad5d00200d5d10/example',
+    //baseUrl: 'http://10.92.34.48:88',
     header: {
-      'Content-Type': 'application/json;charset=UTF-8'
+      'Content-Type': 'application/x-www-form-urlencoded',
+	  'Token': ''
     },
     method: 'GET',
     dataType: 'json',
@@ -59,6 +64,8 @@ export default class Request {
     options.data = options.data || {}
     options.header = options.header || this.config.header
     options.method = options.method || this.config.method
+	//设置Token added by yangning.hong
+	options.header['Token'] = store.state.user.token
     return new Promise((resolve, reject) => {
       let next = true
       let _config = null

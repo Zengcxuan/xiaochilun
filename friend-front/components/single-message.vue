@@ -1,9 +1,9 @@
 <template>
 	<view class="single-message" @click="bindClick">
 		<view class="single-message-circle" @click="goCirecle(msg)" v-if="tp === 1" style="background: rgb(245, 245, 245);">
-			<image class="single-message-circle_img" :src="msg.image_url" ></image>
+			<image class="single-message-circle_img" :src="msg.circle_img" ></image>
 			<view style="display: flex; flex: 1; flex-direction: column; position: absolute; left: 120upx;">
-				<text class="single-message-circle_name">{{ msg.post_id }}</text>
+				<text class="single-message-circle_name">{{ msg.circle_name }}</text>
 				<text class="single-message-circle_usernumber" style="color: rgb(0, 255, 0);">1万名即友加入</text>	
 			</view>
 			<view class="single-message-circle-user">
@@ -15,19 +15,19 @@
 		</view>
 		<!-- type == 2 begin -->
 		<view class="single-message-circle" v-if="tp === 2">
-			<image class="single-message-circle_img" :src="msg.image_url" ></image>
+			<image class="single-message-circle_img" :src="msg.circle_img" ></image>
 			<view style="display: flex; flex: 1; flex-direction: column; position: absolute; left: 120upx;">
-				<text class="single-message-circle_name">{{ msg.post_id }}</text>
+				<text class="single-message-circle_name">{{ msg.circle_name }}</text>
 				<text class="single-message-circle_usernumber" style="color: rgb(200, 200, 200);">05/22</text>
 			</view>
 		</view>
 		<!-- type == 2 End -->
 		<view class="single-message-content" @click="goDetail(msg)">
-			<text class="single-message-content_detail">{{ msg.title }}</text>
+			<text class="single-message-content_detail">{{ msg.detail }}</text>
             <!-- 			加一个view放图片 -->
 		</view>
 		<view class="single-message-belong" @click="goUser(msg)" v-if="tp === 1">
-			<image class="single-message-belong_head" src="/static/img/home/head/man.png" ></image>
+			<image class="single-message-belong_head" :src="msg.image_url" ></image>
 			<view style="width: auto; height: 60upx; position: relative; left:70upx; margin-top: 25upx; white-space: nowrap; display: flex; flex: 1; flex-direction: row;">
 				<text class="single-message-belong_name"> {{ msg.source }} </text>
 				<text class="single-message-belong_send"> 发布 </text>	
@@ -35,16 +35,16 @@
 		</view>
 		<view class="single-message-modify">
 			<view class="single-message-modify-module" @click="clickGood(msg)">
-				<image class="single-message-modify-module_icon" src="/static/img/home/msg/good.png" ></image>
-				<text class="single-message-modify-module_count">999</text>
+				<image class="single-message-modify-module_icon" :src="computedIsClickGood" ></image>
+				<text class="single-message-modify-module_count">{{ msg.good_count }}</text>
 			</view>
 			<view class="single-message-modify-module" @click="clickComment(msg)">
 				<image class="single-message-modify-module_icon" src="/static/img/home/msg/comment.png"></image>
-				<text class="single-message-modify-module_count">{{msg.comments_count}}</text>
+				<text class="single-message-modify-module_count">{{ msg.comments_count }}</text>
 			</view>
 			<view class="single-message-modify-module" @click="clickForward(msg)">
 				<image class="single-message-modify-module_icon" src="/static/img/home/msg/forward.png"></image>
-				<text class="single-message-modify-module_count">999</text>
+				<text class="single-message-modify-module_count">{{ msg.forward_count }}</text>
 			</view>			
 			<image src="/static/img/home/msg/more.png" style="position: absolute; right: 5upx; height: 40upx; width: 40upx;" mode=""></image>
 		</view>
@@ -69,6 +69,20 @@
 				}
 			}
         },
+		data() {
+			return {
+				isClickGood: false,
+			}
+		},
+		computed:{
+			computedIsClickGood() {
+				if(this.isClickGood){
+					return '/static/img/home/msg/gooded.png'
+				} else {
+					return '/static/img/home/msg/good.png'
+				}
+			}
+		},
 		methods: {
 		    close(e) {
 		        this.$emit('close');
@@ -86,6 +100,7 @@
 				console.log('go user');
 			},
 			clickGood(detail) {
+				this.isClickGood = !(this.isClickGood);
 				console.log('click good');
 			},
 			clickComment(detail) {

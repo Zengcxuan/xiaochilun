@@ -6,20 +6,20 @@
 		<view class="registercontent">
 			<view class="has-mglr-10 ">
 				<view class=" has-mgtb-10 ">
-					<input type="number" maxlength="11" placeholder="请输入手机号" class="is-input1 " />
+					<input type="number" maxlength="11" placeholder="请输入手机号" @input="inputMobile" class="is-input1 " />
 				</view>
-				<view class="has-mgtb-10">
+				<view class="has-mgtb-10" style="height: 88upx">
 					<input type="number" maxlength="6" placeholder="短信验证码" class="code_content " />
 					<view class="code_img" @tap="getsmscode">{{smsbtn.text}}</view>
 				</view>
 				<view class=" has-radius has-mgtb-10">
-					<input placeholder="设置登录密码" :password="true" class="is-input1" />
+					<input placeholder="设置登录密码" :password="true" @input="inputPwd" class="is-input1" />
 				</view>
 				<view class=" has-radius has-mgtb-10">
-					<input placeholder="确认登录密码" :password="true" class="is-input1" />
+					<input placeholder="确认登录密码" :password="true" @input="inputPwdConfirm" class="is-input1" />
 				</view>
 				<view class=" registerbtn has-radius has-mgtb-20">
-					<button>注 册</button>
+					<button @tap="doRegister">注 册</button>
 				</view>
 			</view>
 		</view>
@@ -32,9 +32,16 @@
 </template>
 
 <script>
+	import {
+		Register
+	} from '../../api/api.js'
+	
 	export default {
 		data() {
 			return {
+				mobile: '',
+				userpwd: '',
+				userpwd_cnf: '',
 				smsbtn: {
 					text: '获取验证码',
 					status: false,
@@ -64,8 +71,43 @@
 					},
 					1000);
 				return false;
+			},
+			inputMobile(e) {
+				this.mobile = e.target.value
+			},
+			inputPwd(e) {
+				this.userpwd = e.target.value
+			},
+			inputPwdConfirm(e) {
+				this.userpwd_cnf = e.target.value
+			},
+			doRegister() {
+				if (this.mobile == '' || this.userpwd == '' || this.userpwd_cnf == ''){
+					console.log("手机号，密码不能为空");
+				}
+				if (this.userpwd != this.userpwd_cnf){
+					console.log("请重新确认密码");
+				}
+				let regInfo = {
+					mobile: this.mobile,
+					password: this.userpwd
+				}
+				Register(regInfo).then(res => {
+					console.log("register success");
+					let code = res.data.code;
+					let info = res.data.info;
+					if (code == 200) {
+						uni.showToast({title: info + "\ncode" + code});
+						uni.navigateTo({
+							url: '/pages/login/login'
+						});
+					} else {
+						uni.showToast({title: info + "\ncode" + code});
+					}
+				}).catch(err => {
+					console.log("register fail");
+				})
 			}
-
 		}
 	}
 </script>
@@ -90,25 +132,25 @@
 	}
 
 	.logoimg {
-		width: 200rpx;
-		height: 200rpx;
+		width: 200upx;
+		height: 200upx;
 		border-radius: 50%;
 	}
 
 	.is-input1 {
-		height: 88rpx;
+		height: 88upx;
 		width: 100%;
-		line-height: 88rpx;
+		line-height: 88upx;
 		color: #353535;
-		font-size: 32rpx;
+		font-size: 32upx;
 		box-sizing: border-box;
 		appearance: none;
-		border: 2rpx solid #e5e5e5;
+		border: 2upx solid #e5e5e5;
 		box-shadow: none;
-		border-radius: 44rpx;
+		border-radius: 44upx;
 		outline: 0;
 		display: block;
-		padding-left: 30rpx;
+		padding-left: 30upx;
 		margin: 0;
 		font-family: inherit;
 		background: #fff;
@@ -117,34 +159,33 @@
 
 	.iconfont {
 		position: absolute;
-		font-size: 40rpx;
+		font-size: 40upx;
 		right: 12%;
 		z-index: 999;
-		width: 105rpx;
+		width: 105upx;
 		text-align: center;
 		color: #353535;
 		margin-top: -11%;
 		background: #fff;
-		border-top-right-radius: 44rpx;
-		border-bottom-right-radius: 44rpx;
-		height: 80rpx;
-		line-height: 80rpx;
+		border-top-right-radius: 44upx;
+		border-bottom-right-radius: 44upx;
+		height: 80upx;
+		line-height: 80upx;
 	}
 
 	.code_content{
-		height: 88rpx;
+		height: 88upx;
 		width: 70%;
-		line-height: 88rpx;
+		line-height: 88upx;
 		color: #353535;
-		font-size: 32rpx;
+		font-size: 32upx;
 		box-sizing: border-box;
 		appearance: none;
-		border: 2rpx solid #e5e5e5;
+		border: 2upx solid #e5e5e5;
 		box-shadow: none;
-		border-radius: 44rpx;
+		border-radius: 44upx;
 		outline: 0;
-		display: block;
-		padding-left: 30rpx;
+		padding-left: 30upx;
 		margin: 0;
 		font-family: inherit;
 		background: #fff;
@@ -154,25 +195,25 @@
 
 	.code_img {
 		float: right;
-		font-size: 28rpx;
+		font-size: 28upx;
 		z-index: 999;
 		width: 30%;
 		text-align: center;
 		color: #FFFFFF;
 		background-color: #39b54a;
-		border-radius: 44rpx;
-		height: 88rpx;
-		line-height: 88rpx;
+		border-radius: 44upx;
+		height: 88upx;
+		line-height: 88upx;
 	}
 
 	.registerbtn button {
-		margin-top: 20rpx;
-		height: 88rpx;
+		margin-top: 20upx;
+		height: 88upx;
 		width: 100%;
-		line-height: 88rpx;
+		line-height: 88upx;
 		color: #ffffff;
-		font-size: 32rpx;
-		border-radius: 44rpx;
+		font-size: 32upx;
+		border-radius: 44upx;
 		outline: 0;
 		display: block;
 		margin: 0;
@@ -182,22 +223,22 @@
 	}
 
 	button:after {
-		border: 2rpx solid #f2f2f2;
+		border: 2upx solid #f2f2f2;
 	}
 
 	.has-mgtb-10 {
-		margin-top: 20rpx !important;
-		margin-bottom: 20rpx !important;
+		margin-top: 20upx !important;
+		margin-bottom: 20upx !important;
 	}
 
 	.has-mglr-10 {
-		margin-left: 20rpx !important;
-		margin-right: 20rpx !important;
+		margin-left: 20upx !important;
+		margin-right: 20upx !important;
 	}
 
 	.has-mgtb-20 {
-		margin-top: 40rpx !important;
-		margin-bottom: 40rpx !important;
+		margin-top: 40upx !important;
+		margin-bottom: 40upx !important;
 	}
 
 	.has-radius {

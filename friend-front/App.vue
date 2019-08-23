@@ -17,4 +17,7 @@ export default {
 /*引入color ui样式*/
 @import "colorui/main.css";
 @import "colorui/icon.css";
+
+/*每个页面公共css */
+@import './common/uni.css';
 </style>

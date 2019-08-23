@@ -79,7 +79,7 @@
 			for(var i=0;i < this.allCircles.length;i++){
 				var subList = [];
 					for(var j=0;j<30;j++){
-						subList.push({"NAME":"圈子"+j})
+						subList.push({"NAME": this.allCircles[i].type + ": 圈子"+j})
 					}
 				this.categoryList.push({"NAME": this.allCircles[i].type, "subCategoryList":subList});
 			}

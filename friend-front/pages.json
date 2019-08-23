@@ -77,9 +77,33 @@
 			}
 		},
         {
-            "path" : "pages/dynamic/dynamic",
+            "path" : "pages/dynamic/home/index",
             "style" : {}
         },
+        {
+	   "path":"pages/dynamic/findfriend/find",
+	   "style": {
+			"navigationBarTitleText": ""
+	            }
+	},
+         {
+	   "path": "pages/dynamic/issue/dynamic",
+	    "style": {
+			"navigationBarTitleText": ""
+	             }
+	},
+	{
+	   "path": "pages/dynamic/comment/addcomment",
+	   "style": {
+			"navigationBarTitleText": "动态详情"
+		    }
+	},
+	{
+	   "path": "pages/dynamic/info/infopage",
+	   "style": {
+		       "navigationBarTitleText": ""
+	            }
+	},
         {
             "path" : "pages/publish/publish",
             "style" : {}
@@ -100,7 +124,26 @@
             "style" : {
                 "navigationBarTitleText" : "设置"
             }
+        },{
+            "path" : "pages/mine/user_details",
+            "style" : {}
         }
+        ,{
+            "path" : "pages/mine/user_edit",
+            "style" : {
+				 "navigationBarTitleText" : "编辑个人信息"
+			}
+        },{
+			"path":"pages/mine/image_upload",
+			"style":{
+				"navigationBarTitleText" : "更换头像"
+			}
+		},{
+			"path":"pages/mine/info_edit",
+			"style":{
+				"navigationBarTitleText" : "信息编辑"
+			}
+		}
     ],
     "tabBar" : {
         "color" : "#848484",
@@ -114,13 +157,13 @@
                 "selectedIconPath" : "static/img/tabbar/tab_home_selected.png"
             },
             {
-                "pagePath" : "pages/dynamic/dynamic",
+                "pagePath" : "pages/dynamic/home/index",
                 "text" : "动态",
                 "iconPath" : "static/img/tabbar/tab_dynamic.png",
                 "selectedIconPath" : "static/img/tabbar/tab_dynamic_selected.png"
             },
             {
-                "pagePath" : "pages/publish/publish",
+                "pagePath" : "pages/dynamic/issue/dynamic",
                 "iconPath" : "static/img/tabbar/tab_publish.png",
                 "selectedIconPath" : "static/img/tabbar/tab_publish.png"
             },

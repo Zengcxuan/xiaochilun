@@ -5,12 +5,13 @@
 				<image src="../../static/img/mine/settings.png"></image>
 			</view>
 		</view>
-		<view class="user-dashboard" v-if="hasLogin">
+		<view class="user-dashboard" v-if="hasLogin" @click="navTo('/pages/mine/user_details')">
 			<view class="userbox">
 				<image class="portrait" :src="userInfo.avatar"></image>
 				<view class="username">
 					{{userInfo.nickname}}
 				</view>
+				<image class="to" src="../../static/img/common/to.png"></image>
 			</view>
 		</view> 
 		<view class="login-dashboard" v-if="!hasLogin">
@@ -161,6 +162,7 @@
 			font-size: 22px;
 			max-width: 70%;
 		}
+		.to{flex-shrink:0;width:40upx;height:40upx}
 	}
 }
 

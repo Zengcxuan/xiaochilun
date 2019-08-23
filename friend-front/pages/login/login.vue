@@ -12,7 +12,7 @@
 						<view class="img">
 							<image style="width:27px;height: 27px;" :src="imgInfo.icon_user" />
 						</view>
-						<input type="text" v-model="username" placeholder="请输入用户账号">
+						<input type="number" maxlength="11" @input="inputMobile" placeholder="请输入手机号">
 						<view class="img">
 							<image @tap="delUser" class="img_del" :src="imgInfo.icon_del" />
 						</view>
@@ -58,7 +58,7 @@
 	export default {
 		data() {
 			return {
-				username: '',
+				mobile: '',
 				userpwd: '',
 				pwdType: 'password',
 				imgInfo: {
@@ -76,24 +76,27 @@
 		},
 		methods: {
 			...mapActions(['login']),
-			inputUsername(e) {
-				this.username = e.target.value
+			inputMobile(e) {
+				this.mobile = e.target.value
 			},
 			inputPwd(e) {
 				this.userpwd = e.target.value
 			},
 			delUser() {
-				this.username = ''
+				this.mobile = ''
 			},
 			switchPwd() {
 				this.pwdType = this.pwdType === 'text' ? 'password' : 'text'
 			},
 			bindLogin() {
-				console.log('username:' + this.username + ',pwd:' + this.userpwd)
-				var loginInfo = {
-					username: this.username,
+				console.log('mobile:' + this.mobile + ',pwd:' + this.userpwd)
+				if (this.mobile == "" || this.userpwd == ""){
+					uni.showToast({title: "手机号或密码不能为空"});
+					return;
+				}
+				let loginInfo = {
+					mobile: this.mobile,
 					password: this.userpwd,
-					token: "123"
 				}
 				this.login(loginInfo).then(res =>{
 					console.log('登录成功 code:' + res.statusCode);
@@ -101,7 +104,8 @@
 						url: '/pages/home/home'
 					})
 				}).catch(err => {
-					console.log('登录失败' + err.errMsg);
+					console.log('登录失败' + err);
+					uni.showToast({title: "登录失败 code" + err.data.code});
 					uni.reLaunch({
 						url: '/pages/home/home'
 					})

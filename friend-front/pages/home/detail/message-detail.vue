@@ -1,5 +1,5 @@
 <template>
-	<view>
+	<view style="overflow: scroll;">
 		<view class="msg-detail-top">
 			<view class="msg-detail-top-belong">
 				<image class="msg-detail-top-belong_head" :src="msg.image_url" ></image>
@@ -11,15 +11,15 @@
 				<text class="msg-detail-top-content_text"> {{ msg.title }} </text>
 			</view>
 			<view class="msg-detail-top-circle">
-				<image class="msg-detail-top-circle_img" :src="msg.image_url"></image>
-				<text class="msg-detail-top-circle_text"> {{ msg.source }} </text>
+				<image class="msg-detail-top-circle_img" :src="msg.circle_img"></image>
+				<text class="msg-detail-top-circle_text"> {{ msg.circle_name }} </text>
 				<button class="msg-detail-top-circle_join" size="mini" @click="changeJoin"> {{ joinText }} </button>
 			</view>
 			<view class="msg-detail-top-border"></view>
 			<view class="msg-detail-top-modify">
 				<view class="msg-detail-top-modify_module" @click="clickGood(msg)">
 					<image class="msg-detail-top-modify_icon" src="/static/img/home/msg/good.png" ></image>
-					<text class="msg-detail-top-modify_count">999</text>
+					<text class="msg-detail-top-modify_count">{{ msg.good_count }}</text>
 				</view>
 				<view class="msg-detail-top-modify_module" @click="clickComment(msg)">
 					<image class="msg-detail-top-modify_icon" src="/static/img/home/msg/comment.png"></image>
@@ -27,7 +27,7 @@
 				</view>
 				<view class="msg-detail-top-modify_module" @click="clickForward(msg)">
 					<image class="msg-detail-top-modify_icon" src="/static/img/home/msg/forward.png"></image>
-					<text class="msg-detail-top-modify_count">999</text>
+					<text class="msg-detail-top-modify_count">{{ msg.forward_count }}</text>
 				</view>			
 				<image src="/static/img/home/msg/more.png" style="position: absolute; right: 20upx; height: 40upx; width: 40upx;" mode=""></image>
 			</view>
@@ -52,6 +52,12 @@
 			<view class="msg-detail-comments-title">
 				<text class="msg-detail-comments-title_text" style="margin: 20upx; text-align: 25upx; position: relative;">所有评论</text>
 			</view>
+			<view class="msg-detail-comments-content">
+				<!-- <dynamic-comment class="" :msg="msg" ></dynamic-comment> -->
+				<block v-for="(commentItem, commentIndex) in commentsList.data" :key="commentIndex">
+					<dynamic-comment class="" :commentMsg="commentItem"></dynamic-comment>
+				</block>
+			</view>
 		</view>
 	</view>
     
@@ -59,6 +65,8 @@
 
 <script>
 	const FAIL_CONTENT = '<p>获取信息失败</p>';
+	import dynamicComment from '../../../components/dynamic-comment.vue';
+	import {GetComments} from '../../../api/api.js';
 	export default {
 		data() {
 			return {
@@ -68,8 +76,12 @@
 				followText: '关注',
 				isCollect: false,
 				joinText: '加入',
-				isJoin: false
+				isJoin: false,
+				commentsList: []
 			}
+		},
+		components: {
+			dynamicComment
 		},
 		computed: {
 			computedIsActive() {
@@ -83,20 +95,25 @@
 				}
 			}
 		},
-		onShareAppMessage() {
-			return {
-				title: this.msg.title,
-				path: '/pages/home/detail/detail?query=' + JSON.stringify(this.msg)
-			}
-		},
-		onLoad(event) {
+		// onShareAppMessage() {
+		// 	return {
+		// 		title: this.msg.title,
+		// 		path: '/pages/home/detail/detail?query=' + JSON.stringify(this.msg)
+		// 	}
+		// },
+		onLoad: function() {
 			// 目前在某些平台参数会被主动 decode，暂时这样处理。
-			try {
-				this.msg = JSON.parse(decodeURIComponent(event.query));
-			} catch (error) {
-				this.msg = JSON.parse(event.query);
-			}
-
+			// try {
+			// 	this.msg = JSON.parse(decodeURIComponent(event.query));
+			// } catch (error) {
+			// 	this.msg = JSON.parse(event.query);
+			// }
+			this.commentsList.push({
+				data: [],
+				requestParams: {
+					column: 'id,detail,good_count,comments_count,forward_count,source,image_url,sub_comment,sub_comment_username,when'
+				},
+			});
 			this.getDetail();
 			uni.setNavigationBarTitle({
 				title: '动态详情'
@@ -104,15 +121,32 @@
 		},
 		methods: {
 			getDetail() {
-				uni.request({
-					url: 'https://unidemo.dcloud.net.cn/api/news/36kr/' + this.msg.post_id,
-					success: (result) => {
-						if (result.statusCode == 200) {
-							this.content = result.data.content;
-						} else {
-							this.content = FAIL_CONTENT;
-						}
+				GetComments(this.commentsList.requestParams).then(res => {
+					console.log(res.statusCode);
+					if (res.statusCode == 200) {
+						const data = res.data.comment.map((comment) => {
+							return {
+								id: comment.id,
+								detail: comment.detail,
+								image_url: comment.userhead,
+								source: comment.username,
+								good_count: comment.good_num,
+								comments_count: comment.count_num,
+								forward_count: comment.forward_num,
+								sub_comment: comment.sub_comment,
+								sub_comment_username: comment.sub_comment_username,
+								when: comment.time
+							};
+						});
+						this.commentsList.data = data;
+						console.log(this.commentsList.data);
+						// data.forEach((comment) => {
+						// 	this.commentsList.data.push(comment);
+						// });
 					}
+				}).catch(err => {
+					console.log("get comment error");
+					console.log(err.errMsg);
 				});
 			},
 			changeFollow() {
